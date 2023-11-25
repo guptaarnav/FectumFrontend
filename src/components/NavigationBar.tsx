@@ -1,82 +1,33 @@
-import React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import Container from '@mui/material/Container';
-import MenuItem from '@mui/material/MenuItem';
+import React, { useState } from 'react';
+import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, MenuItem, Button, Badge, InputBase } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import Button from '@mui/material/Button';
-import InputBase from '@mui/material/InputBase';
-import { alpha, styled } from '@mui/material/styles';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SearchIcon from '@mui/icons-material/Search';
-
+import { useAppContext } from '../context/AppContext'; // Adjust the path according to your project structure
 
 const pages = ['Home', 'Catalog', 'About', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(3),
-    width: 'auto',
-  },
-}));
+const NavigationBar = () => {
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
+  const { cart } = useAppContext(); // Use the context to access cart
 
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '20ch',
-    },
-  },
-}));
-
-
-const NavigationBar: React.FC = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+  const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+  const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
-
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0); // Calculate total items in cart
 
   return (
     <AppBar position="static">
@@ -93,7 +44,7 @@ const NavigationBar: React.FC = () => {
           >
             <MenuIcon />
           </IconButton>
-          
+
           <Menu
             id="menu-appbar"
             anchorEl={anchorElNav}
@@ -118,7 +69,8 @@ const NavigationBar: React.FC = () => {
               </MenuItem>
             ))}
           </Menu>
-          
+
+                    
           <Typography
             variant="h6"
             noWrap
@@ -140,8 +92,8 @@ const NavigationBar: React.FC = () => {
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, justifyContent: 'center' }}>
             <img src="/assets/Black-Logo-Only.png" alt="GenFab" style={{ maxHeight: '50px' }} />
           </Box>
-          
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+
+          <Box sx={(theme) => ({ flexGrow: 1, display: { xs: 'none', md: 'flex' } })}>
             {pages.map((page) => (
               <Button
                 key={page}
@@ -152,16 +104,54 @@ const NavigationBar: React.FC = () => {
               </Button>
             ))}
           </Box>
-          <Search>
-            <SearchIconWrapper>
+
+          {/* Search Bar */}
+          <Box sx={(theme) => ({
+            position: 'relative',
+            borderRadius: 1,
+            backgroundColor: 'rgba(255, 255, 255, 0.15)',
+            '&:hover': { backgroundColor: 'rgba(255, 255, 255, 0.25)' },
+            marginRight: 2,
+            marginLeft: 0,
+            width: '100%',
+            [theme.breakpoints.up('sm')]: { marginLeft: 3, width: 'auto' },
+          })}>
+            <Box sx={(theme) => ({
+              padding: '0 16px',
+              height: '100%',
+              position: 'absolute',
+              pointerEvents: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            })}>
               <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
+            </Box>
+            <InputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
+              sx={(theme) => ({
+                color: 'inherit',
+                '& .MuiInputBase-input': {
+                  padding: '8px 8px 8px 0',
+                  // vertical padding + font size from searchIcon
+                  paddingLeft: `calc(1em + 32px)`,
+                  transition: 'width 0.3s',
+                  width: '100%',
+                  [theme.breakpoints.up('md')]: { width: '20ch' },
+                },
+              })}
             />
-          </Search>
+          </Box>
 
+          {/* Cart Icon */}
+          <IconButton color="inherit" sx={{ ml: 1 }}>
+            <Badge badgeContent={cartItemCount} color="secondary">
+              <ShoppingCartIcon />
+            </Badge>
+          </IconButton>
+
+          {/* User Menu */}
           <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
             <Typography variant="subtitle1" sx={{ display: { xs: 'none', sm: 'block' }, marginRight: '10px' }}>
               Bill Gates
@@ -196,4 +186,5 @@ const NavigationBar: React.FC = () => {
     </AppBar>
   );
 };
+
 export default NavigationBar;
