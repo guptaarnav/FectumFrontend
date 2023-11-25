@@ -9,16 +9,15 @@ const ProductDetails: React.FC = () => {
   const { addToCart } = useAppContext(); // Assuming you have these in your context
   const product = products.find(p => p.id.toString() === productId); // Find the product by ID
 
+  const [quantity, setQuantity] = React.useState(1);
+
   // Add to Cart Handler
   const handleAddToCart = (quantity: number) => {
     addToCart({ ...product, quantity });
   };
 
   if (!product) {
-    console.log('Product not found');
-    console.log('Product ID being searched:', id);
-    console.log('Products:', products);
-    return <div>404! Product not found</div>; // Or some other error handling
+    return <div>404! Product with id {productId} not found</div>; // Or some other error handling
   }
 
   return (
@@ -37,13 +36,13 @@ const ProductDetails: React.FC = () => {
           <Typography variant="h6">Price: ${ (product.price / 100).toFixed(2) }</Typography>
           
           {/* Quantity Input */}
-          <TextField label="Quantity" type="number" defaultValue={1} className="my-3" />
+          <TextField label="Quantity" type="number" value={quantity} onChange={(e) => setQuantity(parseInt(e.target.value, 10))} className="my-3" />
 
           {/* Add to Cart Button */}
           <Button 
             variant="contained" 
             color="primary" 
-            onClick={() => handleAddToCart(1)} // Replace with actual quantity logic
+            onClick={() => handleAddToCart(quantity)} // Replace with actual quantity logic
           >
             Add to Cart
           </Button>

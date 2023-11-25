@@ -52,12 +52,12 @@ export const AppProvider = (props: AppProviderProps) => {
         return {
           ...prevState,
           cart: prevState.cart.map(cartItem => 
-            cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
+            cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity + item.quantity} : cartItem
           )
         };
       } else {
         // If not, add the new item
-        return { ...prevState, cart: [...prevState.cart, { ...item, quantity: 1 }] };
+        return { ...prevState, cart: [...prevState.cart, { ...item, quantity: item.quantity }] };
       }
     });
   };
