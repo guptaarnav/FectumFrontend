@@ -89,7 +89,7 @@ const NavigationBar: React.FC = () => {
               textDecoration: 'none',
             }}
           >
-            <img src="/assets/Black-Main-Sidebyside.png" alt="GenFab" style={{ maxHeight: '50px' }} />
+            <img src="/assets/Black-Main-Sidebyside.png" alt="GenFab" style={{ maxHeight: '70px' }} />
           </Typography>
           
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, justifyContent: 'center' }}>
