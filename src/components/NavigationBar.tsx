@@ -5,8 +5,18 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SearchIcon from '@mui/icons-material/Search';
 import { useAppContext } from '../context/AppContext'; // Adjust the path according to your project structure
+import { Link as RouterLink } from 'react-router-dom';
 
-const pages = ['Home', 'Catalog', 'About', 'Blog'];
+const pages = [
+  {title: 'Home',
+   link: "/"},
+  {title: 'Catalog',
+    link: "/"},
+  {title: 'About',
+    link: "/about"},
+  {title: 'Blog',
+    link: "/"},
+];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const NavigationBar = () => {
@@ -64,9 +74,15 @@ const NavigationBar = () => {
             }}
           >
             {pages.map((page) => (
-              <MenuItem key={page} onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">{page}</Typography>
-              </MenuItem>
+              <Button
+                key={page.title}
+                component={RouterLink}
+                to={page.link}
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                {page.title}
+              </Button>
             ))}
           </Menu>
 
@@ -94,13 +110,15 @@ const NavigationBar = () => {
           </Box>
 
           <Box sx={(theme) => ({ flexGrow: 1, display: { xs: 'none', md: 'flex' } })}>
-            {pages.map((page) => (
+          {pages.map((page) => (
               <Button
-                key={page}
+                key={page.title}
+                component={RouterLink}
+                to={page.link}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {page}
+                {page.title}
               </Button>
             ))}
           </Box>
@@ -145,11 +163,13 @@ const NavigationBar = () => {
           </Box>
 
           {/* Cart Icon */}
-          <IconButton color="inherit" sx={{ ml: 1 }}>
-            <Badge badgeContent={cartItemCount} color="secondary">
-              <ShoppingCartIcon />
-            </Badge>
-          </IconButton>
+          <RouterLink to="/cart" style={{ color: 'inherit' }}>
+            <IconButton color="inherit" sx={{ ml: 1, mr: 1 }}>
+              <Badge badgeContent={cartItemCount} color="secondary">
+                <ShoppingCartIcon />
+              </Badge>
+            </IconButton>
+          </RouterLink>
 
           {/* User Menu */}
           <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
