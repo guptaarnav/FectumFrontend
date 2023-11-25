@@ -8,7 +8,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ProductList from './components/ProductList';
 import NavigationBar from './components/NavigationBar';
 import ProductDetails from './components/ProductDetails';
-import ShoppingCart from './components/ShoppingCart';
+import ShoppingCart from './components/cart/ShoppingCart';
+import CheckoutPage from './components/CheckoutPage';
 
 const theme = createTheme({
   // Define your theme here
@@ -45,6 +46,7 @@ const App: React.FC = () => {
               <Route path="/" element={<ProductList />} />
               <Route path="/product/:productId" element={<ProductDetails />} />
               <Route path="/cart" element={<ShoppingCart />} />
+              <Route path="/checkout" element={<CheckoutPage/>} />
             </Routes>
           </div>
         </Router>
