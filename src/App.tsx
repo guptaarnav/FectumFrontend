@@ -1,9 +1,14 @@
 import React from 'react';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { AppProvider } from './context/AppContext';
-import ProductList from './components/ProductList';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+import { AppProvider } from './context/AppContext';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+import ProductList from './components/ProductList';
 import NavigationBar from './components/NavigationBar';
+import ProductDetails from './components/ProductDetails';
+import ShoppingCart from './components/ShoppingCart';
 
 const theme = createTheme({
   // Define your theme here
@@ -33,10 +38,17 @@ const App: React.FC = () => {
   return (
     <AppProvider>
       <ThemeProvider theme={theme}>
-        <div style={{ backgroundColor: '#FFFFFF' }}> {/* White background */}
-          <NavigationBar />
-          <ProductList />
-        </div>
+        <Router>
+          <div style={{ backgroundColor: '#FFFFFF' }}> {/* White background */}
+            <NavigationBar />
+            <Routes>
+              <Route path="/" element={<ProductList />} />
+              <Route path="/product/:productId" element={<ProductDetails />} />
+              <Route path="/cart" element={<ShoppingCart />} />
+            </Routes>
+          </div>
+        </Router>
+
       </ThemeProvider>
     </AppProvider>
   );

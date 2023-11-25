@@ -31,6 +31,7 @@ module.exports = {
     compress: true,
     port: 3000,
     open: true, // Automatically opens the browser
+    historyApiFallback: true, // Allows the use of the "back" button to handle the routing correctly
   },
   plugins: [
     new HtmlWebpackPlugin({
