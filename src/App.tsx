@@ -3,6 +3,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { AppProvider } from './context/AppContext';
 import ProductList from './components/ProductList';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import NavigationBar from './components/NavigationBar';
 
 const theme = createTheme({
   // Define your theme here
@@ -20,10 +21,10 @@ const theme = createTheme({
     }},
   palette: {
     primary: {
-      main: '#000000', // Black
+      main: '#E0B547', // Hazard Yellow
     },
     secondary: {
-      main: '#E0B547', // Hazard Yellow
+      main: '#000000', // Black
     },
     // You can define other colors as needed
   },
@@ -33,6 +34,7 @@ const App: React.FC = () => {
     <AppProvider>
       <ThemeProvider theme={theme}>
         <div style={{ backgroundColor: '#FFFFFF' }}> {/* White background */}
+          <NavigationBar />
           <ProductList />
         </div>
       </ThemeProvider>
