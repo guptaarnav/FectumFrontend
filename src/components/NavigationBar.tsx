@@ -102,11 +102,11 @@ const NavigationBar = () => {
               textDecoration: 'none',
             }}
           >
-            <img src="/assets/Black-Main-Sidebyside.png" alt="GenFab" style={{ maxHeight: '70px' }} />
+            <img src="/assets/White-Main-Sidebyside.png" alt="GenFab" style={{ maxHeight: '125px', marginTop: '-30px', marginBottom: '-30px'}} />
           </Typography>
           
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, justifyContent: 'center' }}>
-            <img src="/assets/Black-Logo-Only.png" alt="GenFab" style={{ maxHeight: '50px' }} />
+            <img src="/assets/White-Logo-Only.png" alt="GenFab" style={{ maxHeight: '50px' }} />
           </Box>
 
           <Box sx={(theme) => ({ flexGrow: 1, display: { xs: 'none', md: 'flex' } })}>

@@ -29,10 +29,10 @@ const theme = createTheme({
     }},
   palette: {
     primary: {
-      main: '#E0B547', // Hazard Yellow
+      main: '#000000', // Black
     },
     secondary: {
-      main: '#000000', // Black
+      main: '#E0B547', // Hazard Yellow
     },
     // You can define other colors as needed
   },
