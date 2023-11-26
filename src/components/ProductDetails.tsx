@@ -6,7 +6,7 @@ import {products} from '../data/products'; // Adjust path as needed
 
 const ProductDetails: React.FC = () => {
   const { productId } = useParams<{ productId: string }>();
-  const { addToCart } = useAppContext(); // Assuming you have these in your context
+  const { addToCart, isAuthenticated } = useAppContext(); // Assuming you have these in your context
   const product = products.find(p => p.id.toString() === productId); // Find the product by ID
 
   const [quantity, setQuantity] = React.useState(1);
@@ -33,19 +33,21 @@ const ProductDetails: React.FC = () => {
         <div className="col-md-6">
           <Typography variant="h3">{product.name}</Typography>
           <Typography variant="body1" className="my-3">{product.description}</Typography>
+
           <Typography variant="h6">Price: ${ (product.price / 100).toFixed(2) }</Typography>
           
-          {/* Quantity Input */}
-          <TextField label="Quantity" type="number" value={quantity} onChange={(e) => setQuantity(parseInt(e.target.value, 10))} className="my-3" />
-
-          {/* Add to Cart Button */}
-          <Button 
-            variant="contained" 
-            color="primary" 
-            onClick={() => handleAddToCart(quantity)} // Replace with actual quantity logic
-          >
-            Add to Cart
-          </Button>
+          {isAuthenticated && (
+            <>
+              <TextField label="Quantity" type="number" value={quantity} onChange={(e) => setQuantity(parseInt(e.target.value, 10))} className="my-3" />
+              <Button 
+                variant="contained" 
+                color="primary" 
+                onClick={() => handleAddToCart(quantity)} // Replace with actual quantity logic
+              >
+                Add to Cart
+              </Button>
+            </>
+          )}
         </div>
       </div>
     </div>

@@ -22,7 +22,7 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 const NavigationBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const { cart } = useAppContext(); // Use the context to access cart
+  const { cart, isAuthenticated } = useAppContext(); // Use the context to access cart
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -162,17 +162,29 @@ const NavigationBar = () => {
             />
           </Box>
 
-          {/* Cart Icon */}
-          <RouterLink to="/cart" style={{ color: 'inherit' }}>
-            <IconButton color="inherit" sx={{ ml: 1, mr: 1 }}>
-              <Badge badgeContent={cartItemCount} color="secondary">
-                <ShoppingCartIcon />
-              </Badge>
-            </IconButton>
-          </RouterLink>
+          
 
           {/* User Menu */}
-          <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
+          {(!isAuthenticated) ? (
+            <>
+              <RouterLink to="/login" style={{ color: 'inherit' }}>
+                <Button color="inherit">Login</Button>
+              </RouterLink>
+              <RouterLink to="/signup" style={{ color: 'inherit' }}>
+                <Button color="inherit">Sign Up</Button>
+              </RouterLink>
+            </>
+          ) : (
+            <>
+            {/* Cart Icon */}
+              <RouterLink to="/cart" style={{ color: 'inherit' }}>
+              <IconButton color="inherit" sx={{ ml: 1, mr: 1 }}>
+                <Badge badgeContent={cartItemCount} color="secondary">
+                  <ShoppingCartIcon />
+                </Badge>
+              </IconButton>
+            </RouterLink>
+            <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
             <Typography variant="subtitle1" sx={{ display: { xs: 'none', sm: 'block' }, marginRight: '10px' }}>
               Bill Gates
             </Typography>
@@ -201,6 +213,11 @@ const NavigationBar = () => {
               ))}
             </Menu>
           </Box>
+          </>
+          )}
+          
+          
+          
         </Toolbar>
       </Container>
     </AppBar>
