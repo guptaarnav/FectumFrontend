@@ -189,7 +189,8 @@ const NavigationBar = () => {
               Bill Gates
             </Typography>
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <AccountCircleIcon />
+              <AccountCircleIcon sx={{color:"white"}}/>
+
             </IconButton>
             <Menu
               id="menu-appbar"
