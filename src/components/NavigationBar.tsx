@@ -170,7 +170,7 @@ const NavigationBar = () => {
               <RouterLink to="/login" style={{ color: 'inherit' }}>
                 <Button color="inherit">Login</Button>
               </RouterLink>
-              <RouterLink to="/signup" style={{ color: 'inherit' }}>
+              <RouterLink to="/register" style={{ color: 'inherit' }}>
                 <Button color="inherit">Sign Up</Button>
               </RouterLink>
             </>

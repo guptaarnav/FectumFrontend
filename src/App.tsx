@@ -10,6 +10,8 @@ import NavigationBar from './components/NavigationBar';
 import ProductDetails from './components/ProductDetails';
 import ShoppingCart from './components/cart/ShoppingCart';
 import CheckoutPage from './components/CheckoutPage';
+import LoginPage from './components/LoginPage';
+import RegisterPage from './components/RegisterPage';
 
 const theme = createTheme({
   // Define your theme here
@@ -47,6 +49,11 @@ const App: React.FC = () => {
               <Route path="/product/:productId" element={<ProductDetails />} />
               <Route path="/cart" element={<ShoppingCart />} />
               <Route path="/checkout" element={<CheckoutPage/>} />
+              <Route path="*" element={<div>404! Page not found</div>} />
+              <Route path="/about" element={<div>About Page</div>} />
+              <Route path="/blog" element={<div>Blog Page</div>} />
+              <Route path="/login" element={<LoginPage/>} />
+              <Route path="/register" element={<RegisterPage/>} />
             </Routes>
           </div>
         </Router>
