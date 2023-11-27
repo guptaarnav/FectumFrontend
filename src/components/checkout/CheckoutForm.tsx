@@ -1,6 +1,7 @@
 import React from 'react';
 import { TextField, Button, Grid, Paper, Typography } from '@mui/material';
 import { CardElement } from '@stripe/react-stripe-js';
+import { PaymentElement } from '@stripe/react-stripe-js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const CheckoutForm = () => {
@@ -41,7 +42,7 @@ const CheckoutForm = () => {
             Payment Details
           </Typography>
   
-          <CardElement />
+          <PaymentElement />
   
           <Button 
             type="submit" 
